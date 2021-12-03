@@ -1,28 +1,55 @@
 # from django.conf import settings
 from django.urls import include, path
+
 # from django.conf.urls.static import static
 from django.contrib import admin
-
-# from .yasg import urlpatterns as dock_urls
-# from rest_framework_jwt.views import obtain_jwt_token
-# from rest_framework.routers import DefaultRouter
-# from store_api.views import CategoryViewSet, AuthorViewSet
-# from rest_framework.schemas import get_schema_view
-# from rest_framework.documentation import include_docs_urls
-# from rest_framework_swagger.views import get_swagger_view
-
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from to_do_app.views import LoginUser, RegisterUser, LogoutUser
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("api", include("to_do_api.urls")),
     # path("api/accounts/", include("accounts.urls")),
     # path("api/comments/", include("comments.urls")),
     path("", include("to_do_app.urls")),
-
-    # path("api/auth/token/", obtain_jwt_token),
-    # path("api/category/", include(router.urls)),
-    # path("api/author/", include(router2.urls)),
-    # path("api/schema/", schema_view),
-    # path("api/docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-    # path('swagger/', schema_view),
+    path("sign_in/", LoginUser.as_view(), name="sign_in"),
+    path("register/", RegisterUser.as_view(), name="register"),
+    # path("accounts/profile/", ProfileView.as_view(), name="profile"),
+    path("logout/<slug:admin_name>", LogoutUser.as_view(), name="logout"),
+    path(
+        "accounts/password_reset/",
+        auth_views.PasswordResetView.as_view(),
+        name="reset_password",
+    ),
+    path(
+        "accounts/password_reset_sent/",
+        auth_views.PasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "accounts/reset/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "accounts/password_reset_complete/",
+        auth_views.PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
+    path(
+        "accounts/password_change/",
+        PasswordChangeView.as_view(
+            template_name="registration/password_change_form.html"
+        ),
+        name="password_change",
+    ),
+    path(
+        "accounts/password_change/done/",
+        PasswordChangeDoneView.as_view(
+            template_name="registration/password_change_done.html"
+        ),
+        name="password_change_done",
+    ),
+    path('', include('social_django.urls', namespace='social')),
 ]

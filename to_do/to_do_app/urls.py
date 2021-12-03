@@ -12,7 +12,7 @@ from to_do_app.views import home
 
 
 urlpatterns = [
-    path("", home)
+    path("", home, name="home")
     # path("api/comments/", include("comments.urls")),
 
     # path("api/auth/token/", obtain_jwt_token),
