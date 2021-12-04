@@ -2,15 +2,14 @@ from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from .utils import DataMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
-from django.contrib.auth.models import User
 from django.urls.base import reverse_lazy
 from .forms import LoginUserForm, RegisterUserForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-#aboba
 
 def home(request):
+    print(request.user.username)
     return HttpResponse("hello world")
 
 
@@ -18,7 +17,7 @@ class RegisterUser(DataMixin, SuccessMessageMixin, CreateView):
     """Show register form"""
 
     form_class = RegisterUserForm
-    template_name = "to_do_app/register.html"
+    template_name = "to_do_app/registr/index.html"
     success_url = reverse_lazy("sign_in")
     success_message = "User added successfully"
     error_message = "Registration error"
@@ -36,7 +35,7 @@ class LoginUser(DataMixin, SuccessMessageMixin, LoginView):
     """Autorization class"""
 
     form_class = LoginUserForm
-    template_name = "to_do_app/sign_in.html"
+    template_name = "to_do_app/registr/login.html"
     error_message = "Something went wrong"
     success_url = reverse_lazy("home")
     user = ""
@@ -49,26 +48,7 @@ class LoginUser(DataMixin, SuccessMessageMixin, LoginView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class ProfileView(DataMixin, ListView):
-
-    model = User
-    template_name = "market/profile.html"
-
-    def get_context_data(self, *args, **kwargs):
-        try:
-            user = self.request.user
-        except:
-            user = None
-        context = super().get_context_data(*args, **kwargs)
-        c_def = self.get_user_context(
-            user=user,
-            title="Profile",
-        )
-        return dict(list(context.items()) + list(c_def.items()))
-
-
-class LogoutUser(LogoutView, SuccessMessageMixin):
+class LogoutUser(LoginRequiredMixin, LogoutView, SuccessMessageMixin):
 
     next_page = "home"
     success_message = "Logout successfully"
-    #ddd
