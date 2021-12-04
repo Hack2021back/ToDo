@@ -71,3 +71,4 @@ class LogoutUser(LogoutView, SuccessMessageMixin):
 
     next_page = "home"
     success_message = "Logout successfully"
+    #ddd
