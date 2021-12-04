@@ -31,8 +31,8 @@ class ToDoList(models.Model):
         verbose_name_plural = "Plans"
         ordering = ["priority", "task"]
 
-    def save(self, *args, **kwargs):
-        if self.start_data > self.end_data:
-            raise ValidationError("ABOBA")
-        super(ToDoList, self).save(args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.start_data > self.end_data:
+    #         raise ValidationError("ABOBA")
+    #     super(ToDoList, self).save(args, **kwargs)
 

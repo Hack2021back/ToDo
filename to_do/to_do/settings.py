@@ -38,15 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
     "social_django",
-    # "rest_framework.authtoken",
     "rest_framework_swagger",
-    # "allauth",
-    # "allauth.account",
-    # "allauth.socialaccount",
-    # "rest_auth",
-    # "rest_auth.registration",
     "to_do_app.apps.ToDoAppConfig",
     "to_do_api.apps.ToDoApiConfig",
 ]
@@ -59,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "to_do.urls"
@@ -211,3 +207,6 @@ SWAGGER_SETTINGS = {
     "LOGIN_URL": "rest_framework:login",
     "LOGOUT_URL": "rest_framework:logout",
 }
+
+
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]

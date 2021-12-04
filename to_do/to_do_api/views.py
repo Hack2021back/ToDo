@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.views import APIView
-
-# Create your views her# from rest_framework import pagination
+from datetime import datetime
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import (
     CreateAPIView,
@@ -73,17 +72,6 @@ class ToDoViewSet(viewsets.ViewSet):
             )
 
 
-# class ToDoListDateAPIViews(ListAPIView):
-#     """get all posts"""
-
-#     queryset = ToDoList.objects.filter()
-#     serializer_class = ToDoListAllSerialzer
-#     filter_backends = [OrderingFilter]
-#     order_fields = ["priority", "start_data"]
-
-
-
-
 class ToDoListDateAPIViews(APIView):
 
     filter_backends = [OrderingFilter]
@@ -91,5 +79,17 @@ class ToDoListDateAPIViews(APIView):
 
     def get(self, request, date):
         queryset = ToDoList.objects.filter(end_data=date)
+        serializer = ToDoListAllSerialzer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ToDoListTodayAPIViews(APIView):
+
+    filter_backends = [OrderingFilter]
+    order_fields = ["priority", "end_data"]
+
+    def get(self, request):
+        print(datetime.now().strftime("%Y/%m/%d"))
+        queryset = ToDoList.objects.filter(end_data=datetime.now().strftime("%Y/%m/%d"))
         serializer = ToDoListAllSerialzer(queryset, many=True)
         return Response(serializer.data)
