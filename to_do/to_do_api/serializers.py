@@ -18,3 +18,4 @@ class ToDoListAllSerialzer(ModelSerializer):
             "priority",
         ]
 
+

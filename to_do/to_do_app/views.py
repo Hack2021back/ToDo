@@ -47,7 +47,6 @@ class LoginUser(DataMixin, SuccessMessageMixin, LoginView):
 
         return dict(list(context.items()) + list(c_def.items()))
 
-
 class LogoutUser(LoginRequiredMixin, LogoutView, SuccessMessageMixin):
 
     next_page = "home"

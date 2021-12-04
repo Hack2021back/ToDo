@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django import forms
 
 
 
@@ -18,4 +19,6 @@ class ToDoListAdmin(admin.ModelAdmin):
     list_filter = ("start_data", "end_data", "priority")
 
 
+
 admin.site.register(ToDoList, ToDoListAdmin)
+
