@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "social_django",
     # "rest_framework.authtoken",
-    # "rest_framework_swagger",
+    "rest_framework_swagger",
     # "allauth",
     # "allauth.account",
     # "allauth.socialaccount",
@@ -150,6 +150,9 @@ ADMINS = [
 ]
 
 
+REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
+
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -193,3 +196,18 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
     "796246915455-u9o08oa749tlgd2o126eq0v884oju2r7.apps.googleusercontent.com"
 )
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "Qt18SdY9IUcL10X8MGLwMp3r"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ],
+    # "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
+
+SWAGGER_SETTINGS = {
+    "LOGIN_URL": "rest_framework:login",
+    "LOGOUT_URL": "rest_framework:logout",
+}

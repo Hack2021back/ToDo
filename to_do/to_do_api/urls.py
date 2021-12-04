@@ -1,7 +1,7 @@
 # from django.conf import settings
 from django.urls import path
 # from django.conf.urls.static import static
-from to_do_api.views import home
+from to_do_api.views import home, ToDoListDateAPIViews
 # from .yasg import urlpatterns as dock_urls
 # from rest_framework_jwt.views import obtain_jwt_token
 # from rest_framework.routers import DefaultRouter
@@ -12,7 +12,10 @@ from to_do_api.views import home
 
 
 urlpatterns = [
-    path("", home)
+    path("", home),
+    path("to_do_list_date/<slug:date>/", ToDoListDateAPIViews.as_view()),
+
+
     # path("api/comments/", include("comments.urls")),
 
     # path("api/auth/token/", obtain_jwt_token),
