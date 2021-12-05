@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -26,8 +25,7 @@ SECRET_KEY = "django-insecure-v69g+!z5uu3u1a*t)2l3@^x^d=c)+-u7uqh5co8=_i=r53jd5z
 DEBUG = True
 
 ALLOWED_HOSTS = []
-LOGIN_REDIRECT_URL = "home"
-
+LOGIN_REDIRECT_URL = "today"
 
 # Application definition
 
@@ -77,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "to_do.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -87,7 +84,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -107,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -121,33 +116,29 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = "/media/"
-
 
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-STATICFILES_DIRS = [STATIC_DIR]
+STATICFILES_DIRS = ((BASE_DIR / "templates/build/static"),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 ADMINS = [
     ("Me", "djangocommunitypython@gmail.com"),
 ]
 
-
 REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"}
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -159,7 +150,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "duhanov2003@gmail.com"
 EMAIL_HOST_PASSWORD = "proshnik31"
 EMAIL_USE_TLS = True
-
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
@@ -187,12 +177,10 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.user.user_details",
 )
 
-
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
     "796246915455-u9o08oa749tlgd2o126eq0v884oju2r7.apps.googleusercontent.com"
 )
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "Qt18SdY9IUcL10X8MGLwMp3r"
-
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
@@ -207,6 +195,5 @@ SWAGGER_SETTINGS = {
     "LOGIN_URL": "rest_framework:login",
     "LOGOUT_URL": "rest_framework:logout",
 }
-
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]

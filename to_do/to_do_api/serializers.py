@@ -14,7 +14,8 @@ class ToDoListAllSerialzer(ModelSerializer):
             "description",
             "start_data",
             "end_data",
-            "time",
+            "start_time",
+            "end_time",
             "priority",
         ]
 

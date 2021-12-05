@@ -1,7 +1,8 @@
 # from django.conf import settings
 from django.urls import path
 # from django.conf.urls.static import static
-from to_do_app.views import home
+from to_do_app.views import RegisterUser, today, inbox
+
 # from .yasg import urlpatterns as dock_urls
 # from rest_framework_jwt.views import obtain_jwt_token
 # from rest_framework.routers import DefaultRouter
@@ -12,14 +13,7 @@ from to_do_app.views import home
 
 
 urlpatterns = [
-    path("", home, name="home")
-    # path("api/comments/", include("comments.urls")),
-
-    # path("api/auth/token/", obtain_jwt_token),
-    # path("api/category/", include(router.urls)),
-    # path("api/author/", include(router2.urls)),
-    # path("api/schema/", schema_view),
-    # path("api/docs/", include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-    # path('swagger/', schema_view),
-
+    path("", RegisterUser.as_view(), name="register"),
+    path("today", today, name="today"),
+    path("inbox", inbox, name="inbox")
 ]

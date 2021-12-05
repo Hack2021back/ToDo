@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
-from to_do_app.views import LoginUser, RegisterUser, LogoutUser
+from to_do_app.views import LoginUser, LogoutUser
 from to_do_api.views import ToDoViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
@@ -20,7 +20,6 @@ urlpatterns = [
     # path("api/comments/", include("comments.urls")),
     path("", include("to_do_app.urls")),
     path("sign_in/", LoginUser.as_view(), name="sign_in"),
-    path("register/", RegisterUser.as_view(), name="register"),
     # path("accounts/profile/", ProfileView.as_view(), name="profile"),
     path("logout/<slug:admin_name>", LogoutUser.as_view(), name="logout"),
     path(

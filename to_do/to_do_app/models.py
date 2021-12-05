@@ -12,8 +12,9 @@ class ToDoList(models.Model):
     task = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     end_data = models.DateField(blank=True)
-    start_data = models.DateField()
-    time = models.TimeField()
+    start_data = models.DateField(null=True)
+    start_time = models.TimeField(null=True)
+    end_time = models.TimeField()
     priority = models.CharField(max_length=10, choices=CHOICES)
     user = models.ForeignKey(
         User, related_name="user", on_delete=models.CASCADE, null=True

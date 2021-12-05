@@ -6,12 +6,13 @@ from django.views.generic.edit import CreateView
 from django.urls.base import reverse_lazy
 from .forms import LoginUserForm, RegisterUserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 
 
-def home(request):
-    print(request.user.username)
-    return HttpResponse("hello world")
-
+def today(request):
+    return render(request, "build/index.html")
+def inbox(request):
+    return render(request,"build/index.html")
 
 class RegisterUser(DataMixin, SuccessMessageMixin, CreateView):
     """Show register form"""
@@ -31,7 +32,6 @@ class RegisterUser(DataMixin, SuccessMessageMixin, CreateView):
 
 
 class LoginUser(DataMixin, SuccessMessageMixin, LoginView):
-
     """Autorization class"""
 
     form_class = LoginUserForm
@@ -47,7 +47,7 @@ class LoginUser(DataMixin, SuccessMessageMixin, LoginView):
 
         return dict(list(context.items()) + list(c_def.items()))
 
-class LogoutUser(LoginRequiredMixin, LogoutView, SuccessMessageMixin):
 
+class LogoutUser(LoginRequiredMixin, LogoutView, SuccessMessageMixin):
     next_page = "home"
     success_message = "Logout successfully"
