@@ -14,6 +14,7 @@ from to_do_app.views import RegisterUser, today, inbox
 
 urlpatterns = [
     path("", RegisterUser.as_view(), name="register"),
+    path("", RegisterUser.as_view(), name="home"),
     path("today", today, name="today"),
     path("inbox", inbox, name="inbox")
 ]
